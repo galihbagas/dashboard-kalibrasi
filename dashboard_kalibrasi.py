@@ -9,15 +9,14 @@ st.set_page_config(page_title="Dashboard Monitoring Kalibrasi", layout="wide")
 st.title("📊 Dashboard Monitoring Kalibrasi")
 st.caption("Monitoring status kalibrasi peralatan secara real-time")
 
-# ===== UPLOAD DATA =====
-uploaded_file = st.file_uploader("📂 Upload Data Kalibrasi (Excel/CSV)", type=["xlsx", "csv"])
+# ===== LOAD DATA OTOMATIS DARI REPO =====
+file_path = "data_kalibrasi.xlsx"  # Pastikan nama file sama dengan yang di repo
 
-if uploaded_file:
-    # Baca file
-    if uploaded_file.name.endswith(".csv"):
-        df = pd.read_csv(uploaded_file)
-    else:
-        df = pd.read_excel(uploaded_file)
+if os.path.exists(file_path):
+    df = pd.read_excel(file_path)
+else:
+    st.error("❗ File data_kalibrasi.xlsx tidak ditemukan di repository!")
+    st.stop()
 
     # Pastikan kolom yang dibutuhkan ada
     required_cols = ["Tanggal Kalibrasi Terakhir", "Interval (bulan)", "Lokasi", "Kategori"]
@@ -122,3 +121,4 @@ if uploaded_file:
 
 else:
     st.info("📥 Silakan upload file Excel/CSV untuk menampilkan dashboard.")
+
