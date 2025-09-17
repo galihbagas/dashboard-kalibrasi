@@ -11,7 +11,7 @@ st.title("📊 Dashboard Monitoring Kalibrasi")
 st.caption("Monitoring status kalibrasi peralatan secara real-time")
 
 # ===== LOAD DATA OTOMATIS DARI FILE =====
-file_path = "data_kalibrasi.xlsx"  # Pastikan nama file sama dengan yang ada di repo
+file_path = "sample_kalibrasi.xlsx"  # Pastikan nama file sama dengan yang ada di repo
 
 if not os.path.exists(file_path):
     st.error(f"❗ File '{file_path}' tidak ditemukan di repository!")
@@ -101,3 +101,4 @@ with col_a:
 with col_b:
     fig2 = px.pie(filtered_df, names="Lokasi", title="Distribusi Alat per Lokasi")
     st.plotly_chart(fig2, use_container_width=True)
+
